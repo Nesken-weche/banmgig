@@ -1,0 +1,1 @@
+web: gunicorn gig_app.wsgi:application
