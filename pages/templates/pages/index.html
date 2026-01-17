@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIG</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --white: #FFFFFF;
+            --gray-50: #FAFAFA;
+            --gray-100: #F5F5F5;
+            --gray-200: #E5E5E5;
+            --gray-300: #D4D4D4;
+            --gray-400: #A3A3A3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --purple-50: #FAF5FF;
+            --purple-100: #F3E8FF;
+            --purple-500: #A855F7;
+            --purple-600: #9333EA;
+            --purple-700: #7E22CE;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: var(--white);
+            color: var(--gray-800);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-200);
+            z-index: 1000;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gray-600);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--purple-600);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gray-900);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gray-700);
+            border: 1.5px solid var(--gray-300);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-100);
+            border-color: var(--gray-400);
+        }
+
+        .btn-primary {
+            background: var(--purple-600);
+            color: white;
+            box-shadow: 0 2px 8px rgba(147, 51, 234, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: var(--purple-700);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 2rem 4rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--gray-600);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-bar {
+            display: flex;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            background: var(--white);
+            border: 2px solid var(--gray-300);
+            border-radius: 12px;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+                .index-bar {
+            display: flex;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            background: var(--white);
+            border: 2px solid var(--gray-300);
+            border-radius: 12px;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .search-bar:focus-within {
+            border-color: var(--purple-600);
+            box-shadow: 0 6px 24px rgba(147, 51, 234, 0.15);
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            outline: none;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .search-bar button {
+            background: var(--purple-600);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background: var(--purple-700);
+            transform: scale(1.02);
+        }
+
+        .categories {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .category-tag {
+            padding: 0.6rem 1.2rem;
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .category-tag:hover {
+            background: var(--purple-50);
+            color: var(--purple-700);
+            border-color: var(--purple-200);
+            transform: translateY(-2px);
+        }
+
+        /* Gigs Section */
+        .gigs-section {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.8rem;
+            color: var(--gray-900);
+            font-weight: 700;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .filter-tab {
+            padding: 0.6rem 1.5rem;
+            background: transparent;
+            color: var(--gray-600);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .filter-tab.active {
+            color: var(--gray-900);
+        }
+
+        .filter-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--purple-600);
+            border-radius: 3px;
+        }
+
+        .gigs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .gig-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .gig-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+            border-color: var(--gray-300);
+        }
+
+        .gig-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, var(--gray-200) 0%, var(--gray-100) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gig-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(147, 51, 234, 0.05) 100%);
+        }
+
+        .gig-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gig-card:hover .gig-image img {
+            transform: scale(1.05);
+        }
+
+        .like-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .like-btn:hover {
+            background: var(--purple-600);
+            transform: scale(1.1);
+        }
+
+        .like-btn:hover svg {
+            fill: white;
+            stroke: white;
+        }
+
+        .like-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--gray-600);
+            fill: none;
+            transition: all 0.3s ease;
+        }
+
+        .like-btn.liked svg {
+            fill: var(--purple-600);
+            stroke: var(--purple-600);
+        }
+
+        .gig-content {
+            padding: 1.5rem;
+        }
+
+        .gig-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gray-300), var(--gray-200));
+            border: 2px solid var(--white);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .gig-author {
+            flex: 1;
+        }
+
+        .gig-author h4 {
+            font-size: 0.95rem;
+            color: var(--gray-900);
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
+
+        .gig-author .level {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+        }
+
+        .gig-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .gig-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+
+        .star {
+            color: #FFA500;
+            font-size: 1rem;
+        }
+
+        .price {
+            margin-left: auto;
+            font-weight: 700;
+            color: var(--gray-900);
+            font-size: 1.15rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gray-900);
+            color: var(--gray-400);
+            padding: 3rem 2rem 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--white);
+            margin-bottom: 1rem;
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.7rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--purple-500);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-700);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .gigs-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .search-bar {
+                flex-direction: column;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">GIG</div>
+            <ul class="nav-links">
+                <li><a href="#discover" onclick="">Gig cho</a></li>
+                <li><a href="#categories">Kreyate Nou yo</a></li>
+                <!-- <li><a href="#how-it-works">Kijan li Fonksyone</a></li> -->
+                <li><a href="#community">Kominote</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#login" class="btn btn-secondary">Konekte</a>
+                <a href="#signup" class="btn btn-primary">Enskri</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Find the perfect creative talent for your project</h1>
+                <p>Connect with thousands of skilled freelancers ready to bring your vision to life</p>
+                
+                <div class="row">
+                
+                 <div class="col-6">
+                                    <div class="index-bar">
+                
+                    <button>Kreyate</button>
+                </div>
+                    </div>
+                                    <div class="col-6">
+                                    <div class="index-bar">
+                   
+                    <button>Kontni</button>
+                </div>
+                    </div>
+                
+                </div>
+                <!-- <div class="search-bar">
+                
+                    <button>Search</button>
+                </div> -->
+
+
+            </div>
+        </section>
+
+        <section class="gigs-section">
+            <div class="section-header">
+                <h2>GIG CHO</h2>
+                <div class="filter-tabs">
+                    <button class="filter-tab active">Popular</button>
+                    <button class="filter-tab">New</button>
+                    <button class="filter-tab">Top Rated</button>
+                </div>
+            </div>
+
+            <div class="gigs-grid">
+                <!-- Gig Card 1 -->
+                <div class="gig-card">
+                    <div class="gig-image">
+                        <button class="like-btn">
+                            <svg viewBox="0 0 24 24" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="gig-content">
+                        <div class="gig-header">
+                            <div class="avatar"></div>
+                            <div class="gig-author">
+                                <h4>Sarah Chen</h4>
+                                <span class="level">Top Rated Seller</span>
+                            </div>
+                        </div>
+                        <h3 class="gig-title">I will design a modern logo for your brand</h3>
+                        <div class="gig-meta">
+                            <div class="rating">
+                                <span class="star">★</span>
+                                <strong>4.9</strong>
+                                <span>(342)</span>
+                            </div>
+                            <div class="price">From $150</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gig Card 2 -->
+                <div class="gig-card">
+                    <div class="gig-image">
+                        <button class="like-btn liked">
+                            <svg viewBox="0 0 24 24" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="gig-content">
+                        <div class="gig-header">
+                            <div class="avatar"></div>
+                            <div class="gig-author">
+                                <h4>Marcus Rodriguez</h4>
+                                <span class="level">Level 2 Seller</span>
+                            </div>
+                        </div>
+                        <h3 class="gig-title">I will develop a responsive website with React</h3>
+                        <div class="gig-meta">
+                            <div class="rating">
+                                <span class="star">★</span>
+                                <strong>5.0</strong>
+                                <span>(127)</span>
+                            </div>
+                            <div class="price">From $500</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gig Card 3 -->
+                <div class="gig-card">
+                    <div class="gig-image">
+                        <button class="like-btn">
+                            <svg viewBox="0 0 24 24" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="gig-content">
+                        <div class="gig-header">
+                            <div class="avatar"></div>
+                            <div class="gig-author">
+                                <h4>Emma Thompson</h4>
+                                <span class="level">Top Rated Seller</span>
+                            </div>
+                        </div>
+                        <h3 class="gig-title">I will write compelling SEO content for your blog</h3>
+                        <div class="gig-meta">
+                            <div class="rating">
+                                <span class="star">★</span>
+                                <strong>4.8</strong>
+                                <span>(289)</span>
+                            </div>
+                            <div class="price">From $75</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gig Card 4 -->
+                <!-- <div class="gig-card">
+                    <div class="gig-image">
+                        <button class="like-btn">
+                            <svg viewBox="0 0 24 24" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="gig-content">
+                        <div class="gig-header">
+                            <div class="avatar"></div>
+                            <div class="gig-author">
+                                <h4>Alex Kim</h4>
+                                <span class="level">Level 1 Seller</span>
+                            </div>
+                        </div>
+                        <h3 class="gig-title">I will create professional video editing and motion graphics</h3>
+                        <div class="gig-meta">
+                            <div class="rating">
+                                <span class="star">★</span>
+                                <strong>4.9</strong>
+                                <span>(156)</span>
+                            </div>
+                            <div class="price">From $200</div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Gig Card 5 -->
+                <!-- <div class="gig-card">
+                    <div class="gig-image">
+                        <button class="like-btn">
+                            <svg viewBox="0 0 24 24" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="gig-content">
+                        <div class="gig-header">
+                            <div class="avatar"></div>
+                            <div class="gig-author">
+                                <h4>Nina Patel</h4>
+                                <span class="level">Top Rated Seller</span>
+                            </div>
+                        </div>
+                        <h3 class="gig-title">I will design stunning UI/UX for mobile apps</h3>
+                        <div class="gig-meta">
+                            <div class="rating">
+                                <span class="star">★</span>
+                                <strong>5.0</strong>
+                                <span>(412)</span>
+                            </div>
+                            <div class="price">From $350</div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Gig Card 6 -->
+                <!-- <div class="gig-card">
+                    <div class="gig-image">
+                        <button class="like-btn">
+                            <svg viewBox="0 0 24 24" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="gig-content">
+                        <div class="gig-header">
+                            <div class="avatar"></div>
+                            <div class="gig-author">
+                                <h4>David Moore</h4>
+                                <span class="level">Level 2 Seller</span>
+                            </div>
+                        </div>
+                        <h3 class="gig-title">I will compose original music for your project</h3>
+                        <div class="gig-meta">
+                            <div class="rating">
+                                <span class="star">★</span>
+                                <strong>4.7</strong>
+                                <span>(98)</span>
+                            </div>
+                            <div class="price">From $250</div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </section>
+        <section class="gigs-section">
+                        <div class="section-header">
+                <h2>KREYATE NOU YO</h2>
+                <!-- <div class="filter-tabs">
+                    <button class="filter-tab active">Popular</button>
+                    <button class="filter-tab">New</button>
+                    <button class="filter-tab">Top Rated</button>
+                </div> -->
+            </div>
+                            <div class="categories">
+                    <span class="category-tag">Grafis</span>
+                    <span class="category-tag">Fotograf</span>
+                    <span class="category-tag">Monte</span>
+                    <span class="category-tag">Edite</span>
+                    <span class="category-tag">Pwodikte</span>
+                    <span class="category-tag">Enjenye (Miksaj/Mastereng)</span>
+                    <span class="category-tag">Enstrimantis</span>
+                    <span class="category-tag">Pawolye</span>
+                    <span class="category-tag">Desinate e Ilistrate</span>
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>GIG</h3>
+                <p>Connecting talented creatives with ambitious projects. Build something extraordinary together.</p>
+            </div>
+            <div class="footer-section">
+                <h3>For Clients</h3>
+                <ul class="footer-links">
+                    <li><a href="#find">Find Talent</a></li>
+                    <li><a href="#post">Post a Project</a></li>
+                    <li><a href="#how">How it Works</a></li>
+                    <li><a href="#enterprise">Enterprise</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>For Freelancers</h3>
+                <ul class="footer-links">
+                    <li><a href="#work">Find Work</a></li>
+                    <li><a href="#seller">Become a Seller</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#community">Community</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul class="footer-links">
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                    <li><a href="#press">Press</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Artisan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Like button functionality
+        document.querySelectorAll('.like-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                btn.classList.toggle('liked');
+            });
+        });
+
+        // Filter tabs
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+
+        // Category tags interaction
+        document.querySelectorAll('.category-tag').forEach(tag => {
+            tag.addEventListener('click', () => {
+                console.log('Category clicked:', tag.textContent);
+            });
+        });
+    </script>
+</body>
+</html>
