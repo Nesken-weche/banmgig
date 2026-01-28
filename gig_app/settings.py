@@ -30,21 +30,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-fallback-key-change-in-production')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.environ.get('DEBUG', 'False').lower() in ['true', '1', 'yes']
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False').lower() in ['true', '1', 'yes']
+# DEBUG = True
 
 # Dynamically set ALLOWED_HOSTS
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Add additional hosts from environment variable
-# additional_hosts = os.environ.get('ALLOWED_HOSTS', '')
-# if additional_hosts:
-#     ALLOWED_HOSTS += [host.strip() for host in additional_hosts.split(',') if host.strip()]
+additional_hosts = os.environ.get('ALLOWED_HOSTS', '')
+if additional_hosts:
+    ALLOWED_HOSTS += [host.strip() for host in additional_hosts.split(',') if host.strip()]
 
 # # Add your Heroku app domain
-# HEROKU_APP_NAME = os.environ.get('HEROKU_APP_NAME', '')
-# if HEROKU_APP_NAME:
-#     ALLOWED_HOSTS.append(f'{HEROKU_APP_NAME}.herokuapp.com')
+HEROKU_APP_NAME = os.environ.get('HEROKU_APP_NAME', '')
+if HEROKU_APP_NAME:
+    ALLOWED_HOSTS.append(f'{HEROKU_APP_NAME}.herokuapp.com')
 
 # Application definition
 INSTALLED_APPS = [
@@ -157,16 +157,16 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Security settings for production
-# if not DEBUG:
-#     SECURE_SSL_REDIRECT = True
-#     SESSION_COOKIE_SECURE = True
-#     CSRF_COOKIE_SECURE = True
-#     SECURE_BROWSER_XSS_FILTER = True
-#     SECURE_CONTENT_TYPE_NOSNIFF = True
-#     SECURE_HSTS_SECONDS = 31536000  # 1 year
-#     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-#     SECURE_HSTS_PRELOAD = True
-#     X_FRAME_OPTIONS = 'DENY'
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    X_FRAME_OPTIONS = 'DENY'
 
 # Logging configuration
 LOGGING = {
