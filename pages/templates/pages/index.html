@@ -286,6 +286,11 @@
             max-width: 1400px;
             margin: 0 auto;
         }
+        .kreyate-section {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
         .section-header {
             display: flex;
@@ -585,6 +590,67 @@
                 grid-template-columns: 1fr;
             }
         }
+            .purple-btn {
+                background: var(--purple-600);
+                color: #fff;
+                border: none;
+                padding: 1rem 2.5rem;
+                border-radius: 8px;
+                font-weight: 600;
+                cursor: pointer;
+                font-size: 1.1rem;
+                transition: background 0.3s, transform 0.2s;
+                box-shadow: 0 2px 8px rgba(147, 51, 234, 0.15);
+            }
+            .purple-btn:hover {
+                background: var(--purple-700);
+                transform: translateY(-2px) scale(1.03);
+            }
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(30, 0, 60, 0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        transition: opacity 0.3s;
+    }
+    .modal-content {
+        background: #fff;
+        border-radius: 16px;
+        padding: 2.5rem 2rem 2rem;
+        box-shadow: 0 8px 40px rgba(80, 0, 120, 0.18);
+        min-width: 320px;
+        max-width: 95vw;
+        position: relative;
+        animation: fadeInUp 0.4s;
+    }
+    .close-modal {
+        position: absolute;
+        top: 1.2rem;
+        right: 1.5rem;
+        font-size: 2rem;
+        color: #9333EA;
+        cursor: pointer;
+        font-weight: bold;
+        transition: color 0.2s;
+    }
+    .close-modal:hover {
+        color: #7E22CE;
+    }
+    .modal-overlay.hidden {
+        display: none !important;
+    }
+    @media (max-width: 600px) {
+        .modal-content {
+            padding: 1.2rem 0.5rem 1.5rem;
+            min-width: 90vw;
+        }
+    }
     </style>
 </head>
 <body>
@@ -592,14 +658,14 @@
         <nav>
             <div class="logo">GIG</div>
             <ul class="nav-links">
-                <li><a href="#discover" onclick="">Gig cho</a></li>
-                <li><a href="#categories">Kreyate Nou yo</a></li>
+                <li><a href="#" id="gig-cho-link">Gig cho</a></li>
+                <li><a href="#" id="kreyate-link">Kreyate Nou yo</a></li>
                 <!-- <li><a href="#how-it-works">Kijan li Fonksyone</a></li> -->
                 <li><a href="#community">Kominote</a></li>
             </ul>
             <div class="nav-actions">
                 <a href="#login" class="btn btn-secondary">Konekte</a>
-                <a href="#signup" class="btn btn-primary">Enskri</a>
+                <a href="{% url 'kreyate_signup' %}" class="btn btn-primary">Enskri</a>
             </div>
         </nav>
     </header>
@@ -611,21 +677,10 @@
                 <p>Connect with thousands of skilled freelancers ready to bring your vision to life</p>
                 
                 <div class="row">
-                
-                 <div class="col-6">
-                                    <div class="index-bar">
-                
-                    <button>Kreyate</button>
-                </div>
+                    <div class="index-bar" style="display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 2rem;">
+                        <button class="purple-btn" id="open-kreyate-modal">Kreyate</button>
+                        <button class="purple-btn">Kontni</button>
                     </div>
-                                    <div class="col-6">
-                                    <div class="index-bar">
-                   
-                    <button>Kontni</button>
-                </div>
-                    </div>
-                
-                </div>
                 <!-- <div class="search-bar">
                 
                     <button>Search</button>
@@ -633,6 +688,45 @@
 
 
             </div>
+        </main>
+
+        <!-- Kreyate Modal Popup (moved outside main/hero for correct overlay behavior) -->
+        <div id="kreyate-modal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <span class="close-modal" id="close-kreyate-modal">&times;</span>
+                <h3 style="color:#9333EA; margin-bottom:1.2rem; text-align:center;">What kind of Kreyate are you looking for?</h3>
+                <form id="kreyate-modal-form">
+                    
+                    <div class="row-field">
+                        <label for="kreyate-category" style="margin-right: 1rem; min-width: 80px;">Category</label>
+                        <select id="kreyate-category" name="kreyate-category" required>
+                            <option value="">Select Category</option>
+                            <option value="grafis">Grafis</option>
+                            <option value="monte">Monte</option>
+                            <option value="desinate">Desinate</option>
+                        </select>
+                    </div>
+                    <div class="row-field">
+                        <label for="kreyate-department" style="margin-right: 1rem; min-width: 80px;">Location (Department in Haiti)</label>
+                        <select id="kreyate-department" name="kreyate-department" required>
+                            <option value="">Select Department</option>
+                            <option value="artibonite">Artibonite</option>
+                            <option value="centre">Centre</option>
+                            <option value="grandanse">Grand'Anse</option>
+                            <option value="nippes">Nippes</option>
+                            <option value="nord">Nord</option>
+                            <option value="nord-est">Nord-Est</option>
+                            <option value="nord-ouest">Nord-Ouest</option>
+                            <option value="ouest">Ouest</option>
+                            <option value="sud">Sud</option>
+                            <option value="sud-est">Sud-Est</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="purple-btn" style="margin-top:1.2rem; width:100%;">Continue</button>
+                </form>
+            </div>
+        </div>
         </section>
 
         <section class="gigs-section">
@@ -821,7 +915,7 @@
                 </div> -->
             </div>
         </section>
-        <section class="gigs-section">
+        <section class="kreyate-section">
                         <div class="section-header">
                 <h2>KREYATE NOU YO</h2>
                 <!-- <div class="filter-tabs">
@@ -840,6 +934,59 @@
                     <span class="category-tag">Enstrimantis</span>
                     <span class="category-tag">Pawolye</span>
                     <span class="category-tag">Desinate e Ilistrate</span>
+                </div>
+                <!-- Designer Cards Dummy Data -->
+                <div class="designer-cards-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; margin: 2.5rem 0 0 0;">
+                    <div class="designer-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Designer" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid #9333EA;">
+                        <h4 style="color: #9333EA; font-size: 1.2rem; margin-bottom: 0.5rem;">Jean Paul</h4>
+                        <div style="color: #525252; font-size: 0.98rem; margin-bottom: 0.7rem;">Web Designer</div>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.7rem;">
+                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">UI/UX</span>
+                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">Figma</span>
+                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">Photoshop</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.3rem; color: #FFA500; font-weight: 600; font-size: 1.05rem;">
+                            <span style="font-size: 1.2rem;">★</span> 4.9
+                        </div>
+                    </div>
+                    <div class="designer-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Designer" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid #9333EA;">
+                        <h4 style="color: #9333EA; font-size: 1.2rem; margin-bottom: 0.5rem;">Marie Claire</h4>
+                        <div style="color: #525252; font-size: 0.98rem; margin-bottom: 0.7rem;">Front End Developer</div>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.7rem;">
+                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">React</span>
+                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">HTML/CSS</span>
+                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">JavaScript</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.3rem; color: #FFA500; font-weight: 600; font-size: 1.05rem;">
+                            <span style="font-size: 1.2rem;">★</span> 4.8
+                        </div>
+                    </div>
+                    <div class="designer-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
+                        <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Designer" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid #9333EA;">
+                        <h4 style="color: #9333EA; font-size: 1.2rem; margin-bottom: 0.5rem;">Pierre Louis</h4>
+                        <div style="color: #525252; font-size: 0.98rem; margin-bottom: 0.7rem;">Logo Maker</div>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.7rem;">
+                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">Illustrator</span>
+                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">Branding</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.3rem; color: #FFA500; font-weight: 600; font-size: 1.05rem;">
+                            <span style="font-size: 1.2rem;">★</span> 4.7
+                        </div>
+                    </div>
+                    <div class="designer-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Designer" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid #9333EA;">
+                        <h4 style="color: #9333EA; font-size: 1.2rem; margin-bottom: 0.5rem;">Sophie Bernard</h4>
+                        <div style="color: #525252; font-size: 0.98rem; margin-bottom: 0.7rem;">Grafis</div>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.7rem;">
+                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">CorelDraw</span>
+                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">Poster Design</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.3rem; color: #FFA500; font-weight: 600; font-size: 1.05rem;">
+                            <span style="font-size: 1.2rem;">★</span> 4.6
+                        </div>
+                    </div>
                 </div>
         </section>
     </main>
@@ -884,6 +1031,40 @@
     </footer>
 
     <script>
+        // Kreyate Modal functionality
+        const kreyateModal = document.getElementById('kreyate-modal');
+        const openKreyateModalBtn = document.getElementById('open-kreyate-modal');
+        const closeKreyateModalBtn = document.getElementById('close-kreyate-modal');
+        if (openKreyateModalBtn && closeKreyateModalBtn && kreyateModal) {
+            openKreyateModalBtn.addEventListener('click', function() {
+                kreyateModal.classList.remove('hidden');
+            });
+            closeKreyateModalBtn.addEventListener('click', function() {
+                kreyateModal.classList.add('hidden');
+            });
+            // Close modal on overlay click
+            kreyateModal.addEventListener('click', function(e) {
+                if (e.target === kreyateModal) {
+                    kreyateModal.classList.add('hidden');
+                }
+            });
+        }
+        // Scroll to the first .gigs-section when 'Gig cho' is clicked
+        document.getElementById('gig-cho-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            const section = document.querySelector('.gigs-section');
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+        // Scroll to the .kreyate-section when 'Kreyate Nou yo' is clicked
+        document.getElementById('kreyate-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            const section = document.querySelector('.kreyate-section');
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
         // Like button functionality
         document.querySelectorAll('.like-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {

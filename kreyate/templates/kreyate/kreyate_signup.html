@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kreyate Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .signup-container {
+            max-width: 400px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 2rem 2.5rem 2rem 2.5rem;
+        }
+        h2 {
+            text-align: center;
+            color: #9333EA;
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+        }
+        input, select {
+            width: 100%;
+            padding: 0.7rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        .hidden {
+            display: none;
+        }
+        button {
+            width: 100%;
+            background: #9333EA;
+            color: #fff;
+            border: none;
+            padding: 0.9rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #7E22CE;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Kreyate Signup</h2>
+        <form id="signup-form">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+
+            <!-- <label for="country">Country</label>
+            <select id="country" name="country" required>
+                <option value="">Select Country</option>
+                <option value="usa">USA</option>
+                <option value="canada">Canada</option>
+                <option value="dominican_republic">Dominican Republic</option>
+                <option value="haiti">Haiti</option>
+            </select> -->
+
+            <!-- <div id="haiti-fields" class="hidden">
+                <label for="department">Department</label>
+                <select id="department" name="department">
+                    <option value="">Select Department</option>
+                    <option value="artibonite">Artibonite</option>
+                    <option value="centre">Centre</option>
+                    <option value="grandanse">Grand'Anse</option>
+                    <option value="nippes">Nippes</option>
+                    <option value="nord">Nord</option>
+                    <option value="nord-est">Nord-Est</option>
+                    <option value="nord-ouest">Nord-Ouest</option>
+                    <option value="ouest">Ouest</option>
+                    <option value="sud">Sud</option>
+                    <option value="sud-est">Sud-Est</option>
+                </select>
+
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" placeholder="Enter city">
+            </div> -->
+
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+    <script>
+        // Show Haiti fields if Haiti is selected
+        document.getElementById('country').addEventListener('change', function() {
+            var haitiFields = document.getElementById('haiti-fields');
+            if (this.value === 'haiti') {
+                haitiFields.classList.remove('hidden');
+            } else {
+                haitiFields.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
