@@ -4,3 +4,6 @@ from django.shortcuts import render
 
 def index(request):
     return render(request, 'pages/index.html')
+
+def gig_creation(request):
+    return render(request, 'pages/gig_creation.html')

@@ -601,6 +601,7 @@
                 font-size: 1.1rem;
                 transition: background 0.3s, transform 0.2s;
                 box-shadow: 0 2px 8px rgba(147, 51, 234, 0.15);
+                text-decoration: none;
             }
             .purple-btn:hover {
                 background: var(--purple-700);
@@ -664,8 +665,26 @@
                 <li><a href="#community">Kominote</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="#login" class="btn btn-secondary">Konekte</a>
-                <a href="{% url 'kreyate_signup' %}" class="btn btn-primary">Enskri</a>
+                <div class="dropdown" style="position: relative;">
+                    <button class="btn btn-primary" id="loginDropdownBtn" style="width: 120px;">Konekte ▼</button>
+                    <div id="loginDropdownMenu" style="display: none; position: absolute; top: 110%; left: 0; background: #fff; border: 1px solid #E5E5E5; border-radius: 8px; box-shadow: 0 4px 16px rgba(147,51,234,0.08); min-width: 120px; z-index: 1001;">
+                        <a href="{% url 'user_login_signup' %}?type=kreyate" style="display: block; padding: 0.8rem 1.2rem; color: #404040; text-decoration: none; font-weight: 500;">
+                            <span style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                                <!-- Handwriting Icon for Worker -->
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9333EA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><path d="M2 20l6-6"/><path d="M17.5 6.5a2.121 2.121 0 0 1 3 3L7 23H2v-5l15.5-15.5z"/></svg>
+                                Kreyate <span style="color:#9333EA; font-size:0.95rem; font-weight:400;">(Worker)</span>
+                            </span>
+                        </a>
+                        <a href="{% url 'user_login_signup' %}?type=kliyan" style="display: block; padding: 0.8rem 1.2rem; color: #404040; text-decoration: none; font-weight: 500;">
+                            <span style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                                <!-- Person Icon for Customer -->
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9333EA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><circle cx="12" cy="8" r="4"/><rect x="6" y="14" width="12" height="6" rx="3"/></svg>
+                                Kliyan <span style="color:#9333EA; font-size:0.95rem; font-weight:400;">(Customer)</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <!-- <a href="{% url 'kreyate_signup' %}" class="btn btn-primary">Enskri</a> -->
             </div>
         </nav>
     </header>
@@ -678,8 +697,10 @@
                 
                 <div class="row">
                     <div class="index-bar" style="display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 2rem;">
-                        <button class="purple-btn" id="open-kreyate-modal">Kreyate</button>
-                        <button class="purple-btn">Kontni</button>
+<!-- <button class="purple-btn" id="open-kreyate-modal" onclick="window.location.href='{% url "kreyate_signup" %}'">Vin on Kreyate</button> -->
+   <a href="{% url 'kreyate_signup' %}" class="purple-btn">Vin on Kreyate</a>
+      <a href="{% url 'user_login_signup' %}" class="purple-btn">Kreye yon GIG</a>
+                        <!-- <button class="purple-btn">Kreye yon GIG</button> -->
                     </div>
                 <!-- <div class="search-bar">
                 
@@ -1087,6 +1108,21 @@
                 console.log('Category clicked:', tag.textContent);
             });
         });
+
+        // Dropdown functionality for login
+        const loginDropdownBtn = document.getElementById('loginDropdownBtn');
+        const loginDropdownMenu = document.getElementById('loginDropdownMenu');
+        if (loginDropdownBtn && loginDropdownMenu) {
+            loginDropdownBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                loginDropdownMenu.style.display = loginDropdownMenu.style.display === 'block' ? 'none' : 'block';
+            });
+            document.addEventListener('click', function(e) {
+                if (!loginDropdownBtn.contains(e.target)) {
+                    loginDropdownMenu.style.display = 'none';
+                }
+            });
+        }
     </script>
 </body>
 </html>
