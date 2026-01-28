@@ -291,7 +291,11 @@
             max-width: 1400px;
             margin: 0 auto;
         }
-
+        .kominote-section {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
         .section-header {
             display: flex;
             justify-content: space-between;
@@ -662,7 +666,7 @@
                 <li><a href="#" id="gig-cho-link">Gig cho</a></li>
                 <li><a href="#" id="kreyate-link">Kreyate Nou yo</a></li>
                 <!-- <li><a href="#how-it-works">Kijan li Fonksyone</a></li> -->
-                <li><a href="#community">Kominote</a></li>
+                <li><a href="#" id="kominote-link">Kominote</a></li>
             </ul>
             <div class="nav-actions">
                 <div class="dropdown" style="position: relative;">
@@ -1010,6 +1014,41 @@
                     </div>
                 </div>
         </section>
+        <section class="kominote-section">
+            <div class="section-header">
+                <h2 style="color:#9333EA;">KOMINOTE BANMGIG</h2>
+            </div>
+            <div class="testimonials-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; margin: 2.5rem 0;">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
+                    <img src="https://randomuser.me/api/portraits/men/21.jpg" alt="User" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 2px solid #9333EA;">
+                    <p style="font-size: 1.05rem; color: #525252; margin-bottom: 1rem; text-align: center;">“Banmgig made it so easy and fast to find a professional designer for my business logo. Highly recommend!”</p>
+                    <div style="color: #9333EA; font-weight: 600;">James Pierre</div>
+                    <div style="color: #737373; font-size: 0.92rem;">Entrepreneur</div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
+                    <img src="https://randomuser.me/api/portraits/women/36.jpg" alt="User" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 2px solid #9333EA;">
+                    <p style="font-size: 1.05rem; color: #525252; margin-bottom: 1rem; text-align: center;">“I needed a website for my portfolio and found a talented developer in minutes. Banmgig is reliable and super convenient!”</p>
+                    <div style="color: #9333EA; font-weight: 600;">Marie Joseph</div>
+                    <div style="color: #737373; font-size: 0.92rem;">Photographer</div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
+                    <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="User" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 2px solid #9333EA;">
+                    <p style="font-size: 1.05rem; color: #525252; margin-bottom: 1rem; text-align: center;">“I found a pro to help with my social media graphics. The process was quick and the results were amazing!”</p>
+                    <div style="color: #9333EA; font-weight: 600;">Samuel Louis</div>
+                    <div style="color: #737373; font-size: 0.92rem;">Small Business Owner</div>
+                </div>
+                <!-- Testimonial 4 -->
+                <div class="testimonial-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
+                    <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="User" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 2px solid #9333EA;">
+                    <p style="font-size: 1.05rem; color: #525252; margin-bottom: 1rem; text-align: center;">“Reliable platform to connect with professionals for any project. I got my flyer designed in just a day!”</p>
+                    <div style="color: #9333EA; font-weight: 600;">Linda Charles</div>
+                    <div style="color: #737373; font-size: 0.92rem;">Event Organizer</div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -1093,6 +1132,18 @@
                 btn.classList.toggle('liked');
             });
         });
+
+        // Scroll to the .kominote-section when 'Kominote' is clicked
+        const kominoteLink = document.getElementById('kominote-link');
+        if (kominoteLink) {
+            kominoteLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = document.querySelector('.kominote-section');
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        }
 
         // Filter tabs
         document.querySelectorAll('.filter-tab').forEach(tab => {
