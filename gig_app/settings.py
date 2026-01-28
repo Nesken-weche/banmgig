@@ -34,7 +34,7 @@ DEBUG = os.environ.get('DEBUG', 'False').lower() in ['true', '1', 'yes']
 # DEBUG = True
 
 # Dynamically set ALLOWED_HOSTS
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'banmgig-e1a19a621c5b.herokuapp.com']
 
 # Add additional hosts from environment variable
 additional_hosts = os.environ.get('ALLOWED_HOSTS', '')
