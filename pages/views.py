@@ -48,6 +48,8 @@ def gig_creation(request):
         )
 
         # Prepare Firebase data from GigCreation instance
+        import datetime
+        now_str = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
         firebase_data = {
             "bizID": "",
             "bizName": gig.full_name,
@@ -59,7 +61,7 @@ def gig_creation(request):
             "id": gig.id,
             "is_avail": True,
             "is_paid": True,
-            "jobSlug": slugify(gig.title) if gig.title else "",
+            "jobSlug": f"{slugify(gig.title)}-{now_str}" if gig.title else now_str,
             "job_link": "",
             "posImg": "_posImg",
             "pos_cos": 0,
@@ -102,6 +104,8 @@ def gig_creation(request):
                 "currency": gig.currency,
                 "method_payment": gig.method_payment,
                 "kreyate_phone": gig.kreyate_phone,
+                "offers": gig.offers,
+
             }
         }
 
@@ -114,3 +118,12 @@ def gig_creation(request):
 
         return redirect('pages:index')
     return render(request, 'pages/gig_creation.html')
+
+def gig_detail(request, gig_id):
+    # Query Firebase for the gig with the matching jobSlug
+    gigs = firebase_client.query_collection('app_jobs', filters=[{'field': 'id', 'operator': 'EQUAL', 'value': gig_id}])
+    if not gigs:
+        return render(request, 'pages/gig_not_found.html', status=404)
+    gig = gigs[0]
+    gig_info = gig.get('gig_creation', {})
+    return render(request, 'pages/gig_detail.html', {'gig': gig, 'gig_info': gig_info})

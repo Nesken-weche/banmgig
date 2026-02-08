@@ -23,6 +23,13 @@
             --purple-500: #A855F7;
             --purple-600: #9333EA;
             --purple-700: #7E22CE;
+            --green-50: #F0FDF4;
+            --green-500: #22C55E;
+            --green-600: #16A34A;
+            --blue-50: #EFF6FF;
+            --blue-500: #3B82F6;
+            --orange-50: #FFF7ED;
+            --orange-500: #F97316;
         }
 
         * {
@@ -201,7 +208,7 @@
             margin-right: auto;
         }
 
-        .search-bar {
+        .index-bar {
             display: flex;
             max-width: 700px;
             margin: 0 auto 3rem;
@@ -211,47 +218,6 @@
             padding: 0.5rem;
             transition: all 0.3s ease;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-        }
-                .index-bar {
-            display: flex;
-            max-width: 700px;
-            margin: 0 auto 3rem;
-            background: var(--white);
-            border: 2px solid var(--gray-300);
-            border-radius: 12px;
-            padding: 0.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-        }
-
-        .search-bar:focus-within {
-            border-color: var(--purple-600);
-            box-shadow: 0 6px 24px rgba(147, 51, 234, 0.15);
-        }
-
-        .search-bar input {
-            flex: 1;
-            border: none;
-            padding: 1rem 1.5rem;
-            font-size: 1rem;
-            outline: none;
-            font-family: 'Work Sans', sans-serif;
-        }
-
-        .search-bar button {
-            background: var(--purple-600);
-            color: white;
-            border: none;
-            padding: 1rem 2.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .search-bar button:hover {
-            background: var(--purple-700);
-            transform: scale(1.02);
         }
 
         .categories {
@@ -280,27 +246,16 @@
             transform: translateY(-2px);
         }
 
-        /* Gigs Section */
+        /* Improved Gigs Section */
         .gigs-section {
             padding: 4rem 2rem;
             max-width: 1400px;
             margin: 0 auto;
+            background: var(--gray-50);
         }
-        .kreyate-section {
-            padding: 4rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        .kominote-section {
-            padding: 4rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+
         .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .section-header h2 {
@@ -308,197 +263,288 @@
             font-size: 2.8rem;
             color: var(--gray-900);
             font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+            padding: 1.5rem;
+            background: var(--white);
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .filter-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .filter-select {
+            padding: 0.6rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--gray-700);
+            background: var(--white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select:hover {
+            border-color: var(--purple-600);
         }
 
         .filter-tabs {
             display: flex;
-            gap: 1.5rem;
+            gap: 0.5rem;
+            background: var(--gray-100);
+            padding: 0.3rem;
+            border-radius: 8px;
         }
 
         .filter-tab {
-            padding: 0.6rem 1.5rem;
+            padding: 0.6rem 1.2rem;
             background: transparent;
             color: var(--gray-600);
             border: none;
             font-weight: 600;
             cursor: pointer;
-            position: relative;
-            transition: color 0.3s ease;
+            border-radius: 6px;
+            transition: all 0.3s ease;
         }
 
         .filter-tab.active {
+            background: var(--white);
             color: var(--gray-900);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
-        .filter-tab.active::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--purple-600);
-            border-radius: 3px;
-        }
-
+        /* Job Cards Grid - Responsive Layout */
         .gigs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns for 751px and up */
+            gap: 1.25rem;
             animation: fadeInUp 0.8s ease-out 0.4s both;
         }
 
-        .gig-card {
+        /* 3 columns between 451px to 750px */
+        @media (max-width: 750px) {
+            .gigs-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* 2 columns for max-width 450px */
+        @media (max-width: 450px) {
+            .gigs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .job-card {
             background: var(--white);
             border: 1px solid var(--gray-200);
             border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 1.75rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
 
-        .gig-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
-            border-color: var(--gray-300);
+        .job-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 24px rgba(147, 51, 234, 0.12);
+            border-color: var(--purple-600);
         }
 
-        .gig-image {
-            width: 100%;
-            height: 220px;
-            background: linear-gradient(135deg, var(--gray-200) 0%, var(--gray-100) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .gig-image::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(147, 51, 234, 0.05) 100%);
-        }
-
-        .gig-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .gig-card:hover .gig-image img {
-            transform: scale(1.05);
-        }
-
-        .like-btn {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.95);
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
+        .job-card-header {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .like-btn:hover {
-            background: var(--purple-600);
-            transform: scale(1.1);
-        }
-
-        .like-btn:hover svg {
-            fill: white;
-            stroke: white;
-        }
-
-        .like-btn svg {
-            width: 20px;
-            height: 20px;
-            stroke: var(--gray-600);
-            fill: none;
-            transition: all 0.3s ease;
-        }
-
-        .like-btn.liked svg {
-            fill: var(--purple-600);
-            stroke: var(--purple-600);
-        }
-
-        .gig-content {
-            padding: 1.5rem;
-        }
-
-        .gig-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 1rem;
+            gap: 1.5rem;
         }
 
-        .avatar {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--gray-300), var(--gray-200));
-            border: 2px solid var(--white);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        }
-
-        .gig-author {
+        .job-card-main {
             flex: 1;
         }
 
-        .gig-author h4 {
-            font-size: 0.95rem;
-            color: var(--gray-900);
-            font-weight: 600;
-            margin-bottom: 0.15rem;
-        }
-
-        .gig-author .level {
-            font-size: 0.8rem;
-            color: var(--gray-500);
-        }
-
-        .gig-title {
-            font-size: 1.1rem;
-            font-weight: 600;
+        .job-title {
+            font-size: 1.35rem;
+            font-weight: 700;
             color: var(--gray-900);
             margin-bottom: 0.75rem;
-            line-height: 1.4;
+            line-height: 1.3;
         }
 
-        .gig-meta {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--gray-200);
+        .job-card:hover .job-title {
+            color: var(--purple-600);
         }
 
-        .rating {
+        .job-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .job-meta-item {
             display: flex;
             align-items: center;
-            gap: 0.3rem;
+            gap: 0.5rem;
             font-size: 0.9rem;
             color: var(--gray-600);
         }
 
-        .star {
-            color: #FFA500;
-            font-size: 1rem;
+        .job-meta-item svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--gray-500);
         }
 
-        .price {
-            margin-left: auto;
+        .job-meta-item strong {
+            color: var(--gray-800);
+        }
+
+        .job-description {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .job-tags {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .job-tag {
+            padding: 0.4rem 0.9rem;
+            background: var(--purple-50);
+            color: var(--purple-700);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .job-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .job-posted {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+        }
+
+        .job-price-section {
+            text-align: right;
+        }
+
+        .job-budget-label {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            margin-bottom: 0.25rem;
+        }
+
+        .job-price {
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--gray-900);
-            font-size: 1.15rem;
+            color: var(--green-600);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+
+        .job-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            background: var(--green-50);
+            color: var(--green-600);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--green-500);
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--green-500);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .apply-btn {
+            padding: 0.75rem 1.75rem;
+            background: var(--purple-600);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .apply-btn:hover {
+            background: var(--purple-700);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+        }
+
+        /* Kreyate Section */
+        .kreyate-section {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .kominote-section {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         /* Footer */
@@ -558,14 +604,74 @@
             font-size: 0.9rem;
         }
 
+        /* Utilities */
+        .purple-btn {
+            background: var(--purple-600);
+            color: #fff;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 2px 8px rgba(147, 51, 234, 0.15);
+            text-decoration: none;
+        }
+
+        .purple-btn:hover {
+            background: var(--purple-700);
+            transform: translateY(-2px) scale(1.03);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(30, 0, 60, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            transition: opacity 0.3s;
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 16px;
+            padding: 2.5rem 2rem 2rem;
+            box-shadow: 0 8px 40px rgba(80, 0, 120, 0.18);
+            min-width: 320px;
+            max-width: 95vw;
+            position: relative;
+            animation: fadeInUp 0.4s;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            color: #9333EA;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover {
+            color: #7E22CE;
+        }
+
+        .modal-overlay.hidden {
+            display: none !important;
+        }
+
         /* Responsive */
         @media (max-width: 968px) {
             .hero h1 {
                 font-size: 3rem;
-            }
-
-            .gigs-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             }
 
             .footer-content {
@@ -574,6 +680,19 @@
 
             .nav-links {
                 display: none;
+            }
+
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .job-card-header {
+                flex-direction: column;
+            }
+
+            .job-price-section {
+                text-align: left;
             }
         }
 
@@ -586,76 +705,39 @@
                 font-size: 1.1rem;
             }
 
-            .search-bar {
-                flex-direction: column;
-            }
-
             .footer-content {
                 grid-template-columns: 1fr;
             }
+
+            .job-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .modal-content {
+                padding: 1.2rem 0.5rem 1.5rem;
+                min-width: 90vw;
+            }
         }
-            .purple-btn {
-                background: var(--purple-600);
-                color: #fff;
-                border: none;
-                padding: 1rem 2.5rem;
-                border-radius: 8px;
-                font-weight: 600;
-                cursor: pointer;
+
+        @media (max-width: 450px) {
+            .job-card {
+                padding: 1.25rem;
+            }
+
+            .job-title {
                 font-size: 1.1rem;
-                transition: background 0.3s, transform 0.2s;
-                box-shadow: 0 2px 8px rgba(147, 51, 234, 0.15);
-                text-decoration: none;
             }
-            .purple-btn:hover {
-                background: var(--purple-700);
-                transform: translateY(-2px) scale(1.03);
+
+            .job-meta-item {
+                font-size: 0.8rem;
             }
-    .modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(30, 0, 60, 0.45);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 2000;
-        transition: opacity 0.3s;
-    }
-    .modal-content {
-        background: #fff;
-        border-radius: 16px;
-        padding: 2.5rem 2rem 2rem;
-        box-shadow: 0 8px 40px rgba(80, 0, 120, 0.18);
-        min-width: 320px;
-        max-width: 95vw;
-        position: relative;
-        animation: fadeInUp 0.4s;
-    }
-    .close-modal {
-        position: absolute;
-        top: 1.2rem;
-        right: 1.5rem;
-        font-size: 2rem;
-        color: #9333EA;
-        cursor: pointer;
-        font-weight: bold;
-        transition: color 0.2s;
-    }
-    .close-modal:hover {
-        color: #7E22CE;
-    }
-    .modal-overlay.hidden {
-        display: none !important;
-    }
-    @media (max-width: 600px) {
-        .modal-content {
-            padding: 1.2rem 0.5rem 1.5rem;
-            min-width: 90vw;
+
+            .job-price {
+                font-size: 1.2rem;
+            }
         }
-    }
     </style>
 </head>
 <body>
@@ -665,7 +747,6 @@
             <ul class="nav-links">
                 <li><a href="#" id="gig-cho-link">Gig cho</a></li>
                 <li><a href="#" id="kreyate-link">Kreyate Nou yo</a></li>
-                <!-- <li><a href="#how-it-works">Kijan li Fonksyone</a></li> -->
                 <li><a href="#" id="kominote-link">Kominote</a></li>
             </ul>
             <div class="nav-actions">
@@ -674,21 +755,18 @@
                     <div id="loginDropdownMenu" style="display: none; position: absolute; top: 110%; left: 0; background: #fff; border: 1px solid #E5E5E5; border-radius: 8px; box-shadow: 0 4px 16px rgba(147,51,234,0.08); min-width: 120px; z-index: 1001;">
                         <a href="{% url 'kreyate:user_login_signup' %}?type=kreyate" style="display: block; padding: 0.8rem 1.2rem; color: #404040; text-decoration: none; font-weight: 500;">
                             <span style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                                <!-- Handwriting Icon for Worker -->
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9333EA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><path d="M2 20l6-6"/><path d="M17.5 6.5a2.121 2.121 0 0 1 3 3L7 23H2v-5l15.5-15.5z"/></svg>
                                 Kreyate <span style="color:#9333EA; font-size:0.95rem; font-weight:400;">(Worker)</span>
                             </span>
                         </a>
                         <a href="{% url 'kreyate:user_login_signup' %}?type=kliyan" style="display: block; padding: 0.8rem 1.2rem; color: #404040; text-decoration: none; font-weight: 500;">
                             <span style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                                <!-- Person Icon for Customer -->
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9333EA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><circle cx="12" cy="8" r="4"/><rect x="6" y="14" width="12" height="6" rx="3"/></svg>
                                 Kliyan <span style="color:#9333EA; font-size:0.95rem; font-weight:400;">(Customer)</span>
                             </span>
                         </a>
                     </div>
                 </div>
-                <!-- <a href="{% url 'kreyate:kreyate_signup' %}" class="btn btn-primary">Enskri</a> -->
             </div>
         </nav>
     </header>
@@ -701,27 +779,19 @@
                 
                 <div class="row">
                     <div class="index-bar" style="display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 2rem;">
-<!-- <button class="purple-btn" id="open-kreyate-modal" onclick="window.location.href='{% url "kreyate:kreyate_signup" %}'">Vin on Kreyate</button> -->
-   <a href="{% url 'kreyate:kreyate_signup' %}" class="purple-btn">Vin on Kreyate</a>
-      <a href="{% url 'pages:gig_creation' %}" class="purple-btn">Kreye yon GIG</a>
-                        <!-- <button class="purple-btn">Kreye yon GIG</button> -->
+                        <a href="{% url 'kreyate:kreyate_signup' %}" class="purple-btn">Vin on Kreyate</a>
+                        <a href="{% url 'pages:gig_creation' %}" class="purple-btn">Kreye yon GIG</a>
                     </div>
-                <!-- <div class="search-bar">
-                
-                    <button>Search</button>
-                </div> -->
-
-
+                </div>
             </div>
-        </main>
+        </section>
 
-        <!-- Kreyate Modal Popup (moved outside main/hero for correct overlay behavior) -->
+        <!-- Kreyate Modal Popup -->
         <div id="kreyate-modal" class="modal-overlay hidden">
             <div class="modal-content">
                 <span class="close-modal" id="close-kreyate-modal">&times;</span>
                 <h3 style="color:#9333EA; margin-bottom:1.2rem; text-align:center;">What kind of Kreyate are you looking for?</h3>
                 <form id="kreyate-modal-form">
-                    
                     <div class="row-field">
                         <label for="kreyate-category" style="margin-right: 1rem; min-width: 80px;">Category</label>
                         <select id="kreyate-category" name="kreyate-category" required>
@@ -747,246 +817,285 @@
                             <option value="sud-est">Sud-Est</option>
                         </select>
                     </div>
-
                     <button type="submit" class="purple-btn" style="margin-top:1.2rem; width:100%;">Continue</button>
                 </form>
             </div>
         </div>
-        </section>
 
+        <!-- IMPROVED GIG CHO SECTION -->
         <section class="gigs-section">
             <div class="section-header">
-                <h2>GIG CHO</h2>
-                <div class="filter-tabs">
-                    <button class="filter-tab active">Popular</button>
-                    <button class="filter-tab">New</button>
-                    <button class="filter-tab">Top Rated</button>
+                <h2>GIG CHO - Available Jobs</h2>
+                <p class="section-subtitle">Browse the latest opportunities from clients looking for talented freelancers</p>
+            </div>
+
+            <!-- Enhanced Filter Bar -->
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <span class="filter-label">Category:</span>
+                    <select class="filter-select">
+                        <option>All Categories</option>
+                        <option>Grafis</option>
+                        <option>Fotograf</option>
+                        <option>Monte</option>
+                        <option>Edite</option>
+                        <option>Desinate</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <span class="filter-label">Budget:</span>
+                    <select class="filter-select">
+                        <option>Any Budget</option>
+                        <option>Under $50</option>
+                        <option>$50 - $100</option>
+                        <option>$100 - $500</option>
+                        <option>$500+</option>
+                    </select>
+                </div>
+
+                <div class="filter-group" style="margin-left: auto;">
+                    <div class="filter-tabs">
+                        <button class="filter-tab active">All Jobs</button>
+                        <button class="filter-tab">New</button>
+                        <button class="filter-tab">Urgent</button>
+                    </div>
                 </div>
             </div>
 
+            <!-- Job Cards Grid -->
             <div class="gigs-grid">
                 {% for job in jobs %}
-                <div class="gig-card">
-                    <div class="gig-image">
-                        <button class="like-btn">
-                            <svg viewBox="0 0 24 24" stroke-width="2">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="gig-content">
-                        <!-- <div class="gig-header">
-                            <div class="avatar"></div>
-                            <div class="gig-author">
-                                <h4>{{ job.post_by|default:job.bizName }}</h4>
-                                <span class="level">{{ job.position|default:'Staff' }}</span>
+                <a href="{% url 'pages:gig_detail' gig_id=job.id %}" class="job-card">
+                    <div class="job-card-header">
+                        <div class="job-card-main">
+                            <h3 class="job-title">{{ job.title|default:'No Title' }}</h3>
+                            
+                            <div class="job-meta">
+                                <div class="job-meta-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>{{ job.location|default:'Remote' }}</span>
+                                </div>
+                                
+                                <div class="job-meta-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                    <span><strong>Deadline:</strong> {{ job.deadline|default:'Flexible' }}</span>
+                                </div>
+
+                                <!-- <div class="job-meta-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    <span>{{ job.bizName|default:'Client Name' }}</span>
+                                </div> -->
                             </div>
-                        </div> -->
-                        <h3 class="gig-title">{{ job.title|default:'No Title' }}</h3>
-                        <div class="gig-meta">
-                            <!-- <div class="rating">
-                                <span class="star">★</span>
-                                <strong>5.0</strong>
-                                <span>(0)</span>
-                            </div> -->
-                            <div class="price">From {{ job.salary|default:'$0' }}</div>
+
+                            <p class="job-description">{{ job.description|default:'Looking for a talented freelancer to help with this project. Must have relevant experience and strong portfolio.' }}</p>
+
+                            <div class="job-tags">
+                                <span class="job-tag">{{ job.category|default:'Grafis' }}</span>
+                                <span class="job-tag">{{ job.skill_level|default:'Intermediate' }}</span>
+                                {% if job.urgent %}
+                                <span class="job-tag" style="background: var(--orange-50); color: var(--orange-500);">Urgent</span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="job-price-section">
+                            <div class="job-status-badge">
+                                <span class="status-dot"></span>
+                                Open
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                    <div class="job-card-footer">
+                        <div class="job-posted">
+                            Posted {{ job.created_at|default:'2 days ago' }}
+                        </div>
+                        
+                        <div class="job-price-section">
+                            <div class="job-budget-label">Budget</div>
+                            <div class="job-price">
+                                {{ job.salary|default:'$150' }}
+                            </div>
+                        </div>
+                    </div>
+                </a>
                 {% endfor %}
 
+                <!-- Sample Job Card (for reference if jobs list is empty) -->
+                {% if not jobs %}
+                <a href="#" class="job-card">
+                    <div class="job-card-header">
+                        <div class="job-card-main">
+                            <h3 class="job-title">Need Professional Logo Design for Tech Startup</h3>
+                            
+                            <div class="job-meta">
+                                <div class="job-meta-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>Port-au-Prince</span>
+                                </div>
+                                
+                                <div class="job-meta-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                    <span><strong>Deadline:</strong> 7 days</span>
+                                </div>
 
-                <!-- <div class="gig-card">
-                    <div class="gig-image">
-                        <button class="like-btn">
-                            <svg viewBox="0 0 24 24" stroke-width="2">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="gig-content">
-                        <div class="gig-header">
-                            <div class="avatar"></div>
-                            <div class="gig-author">
-                                <h4>Alex Kim</h4>
-                                <span class="level">Level 1 Seller</span>
+                                <div class="job-meta-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    <span>TechVision Inc</span>
+                                </div>
                             </div>
-                        </div>
-                        <h3 class="gig-title">I will create professional video editing and motion graphics</h3>
-                        <div class="gig-meta">
-                            <div class="rating">
-                                <span class="star">★</span>
-                                <strong>4.9</strong>
-                                <span>(156)</span>
-                            </div>
-                            <div class="price">From $200</div>
-                        </div>
-                    </div>
-                </div> -->
 
-                <!-- Gig Card 5 -->
-                <!-- <div class="gig-card">
-                    <div class="gig-image">
-                        <button class="like-btn">
-                            <svg viewBox="0 0 24 24" stroke-width="2">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="gig-content">
-                        <div class="gig-header">
-                            <div class="avatar"></div>
-                            <div class="gig-author">
-                                <h4>Nina Patel</h4>
-                                <span class="level">Top Rated Seller</span>
-                            </div>
-                        </div>
-                        <h3 class="gig-title">I will design stunning UI/UX for mobile apps</h3>
-                        <div class="gig-meta">
-                            <div class="rating">
-                                <span class="star">★</span>
-                                <strong>5.0</strong>
-                                <span>(412)</span>
-                            </div>
-                            <div class="price">From $350</div>
-                        </div>
-                    </div>
-                </div> -->
+                            <p class="job-description">Looking for a creative designer to create a modern, memorable logo for our new tech company. Need multiple concepts and revisions included. Must have experience in tech branding.</p>
 
-                <!-- Gig Card 6 -->
-                <!-- <div class="gig-card">
-                    <div class="gig-image">
-                        <button class="like-btn">
-                            <svg viewBox="0 0 24 24" stroke-width="2">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="gig-content">
-                        <div class="gig-header">
-                            <div class="avatar"></div>
-                            <div class="gig-author">
-                                <h4>David Moore</h4>
-                                <span class="level">Level 2 Seller</span>
+                            <div class="job-tags">
+                                <span class="job-tag">Logo Design</span>
+                                <span class="job-tag">Grafis</span>
+                                <span class="job-tag">Branding</span>
                             </div>
                         </div>
-                        <h3 class="gig-title">I will compose original music for your project</h3>
-                        <div class="gig-meta">
-                            <div class="rating">
-                                <span class="star">★</span>
-                                <strong>4.7</strong>
-                                <span>(98)</span>
+
+                        <div class="job-price-section">
+                            <div class="job-status-badge">
+                                <span class="status-dot"></span>
+                                Open
                             </div>
-                            <div class="price">From $250</div>
                         </div>
                     </div>
-                </div> -->
+
+                    <div class="job-card-footer">
+                        <div class="job-posted">Posted 2 hours ago</div>
+                        
+                        <div class="job-price-section">
+                            <div class="job-budget-label">Budget</div>
+                            <div class="job-price">$250</div>
+                        </div>
+                    </div>
+                </a>
+                {% endif %}
             </div>
         </section>
+
+        <!-- KREYATE SECTION -->
         <section class="kreyate-section">
-                        <div class="section-header">
+            <div class="section-header">
                 <h2>KREYATE NOU YO</h2>
-                <!-- <div class="filter-tabs">
-                    <button class="filter-tab active">Popular</button>
-                    <button class="filter-tab">New</button>
-                    <button class="filter-tab">Top Rated</button>
-                </div> -->
             </div>
-                            <div class="categories">
-                    <span class="category-tag">Grafis</span>
-                    <span class="category-tag">Fotograf</span>
-                    <span class="category-tag">Monte</span>
-                    <span class="category-tag">Edite</span>
-                    <span class="category-tag">Pwodikte</span>
-                    <span class="category-tag">Enjenye (Miksaj/Mastereng)</span>
-                    <span class="category-tag">Enstrimantis</span>
-                    <span class="category-tag">Pawolye</span>
-                    <span class="category-tag">Desinate e Ilistrate</span>
-                </div>
-                <!-- Designer Cards Dummy Data -->
-                <div class="designer-cards-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; margin: 2.5rem 0 0 0;">
-                    <div class="designer-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Designer" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid #9333EA;">
-                        <h4 style="color: #9333EA; font-size: 1.2rem; margin-bottom: 0.5rem;">Jean Paul</h4>
-                        <div style="color: #525252; font-size: 0.98rem; margin-bottom: 0.7rem;">Web Designer</div>
-                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.7rem;">
-                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">UI/UX</span>
-                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">Figma</span>
-                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">Photoshop</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 0.3rem; color: #FFA500; font-weight: 600; font-size: 1.05rem;">
-                            <span style="font-size: 1.2rem;">★</span> 4.9
-                        </div>
+            <div class="categories">
+                <span class="category-tag">Grafis</span>
+                <span class="category-tag">Fotograf</span>
+                <span class="category-tag">Monte</span>
+                <span class="category-tag">Edite</span>
+                <span class="category-tag">Pwodikte</span>
+                <span class="category-tag">Enjenye (Miksaj/Mastereng)</span>
+                <span class="category-tag">Enstrimantis</span>
+                <span class="category-tag">Pawolye</span>
+                <span class="category-tag">Desinate e Ilistrate</span>
+            </div>
+            
+            <div class="designer-cards-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; margin: 2.5rem 0 0 0;">
+                <div class="designer-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Designer" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid #9333EA;">
+                    <h4 style="color: #9333EA; font-size: 1.2rem; margin-bottom: 0.5rem;">Jean Paul</h4>
+                    <div style="color: #525252; font-size: 0.98rem; margin-bottom: 0.7rem;">Web Designer</div>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.7rem;">
+                        <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">UI/UX</span>
+                        <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">Figma</span>
+                        <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">Photoshop</span>
                     </div>
-                    <div class="designer-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Designer" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid #9333EA;">
-                        <h4 style="color: #9333EA; font-size: 1.2rem; margin-bottom: 0.5rem;">Marie Claire</h4>
-                        <div style="color: #525252; font-size: 0.98rem; margin-bottom: 0.7rem;">Front End Developer</div>
-                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.7rem;">
-                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">React</span>
-                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">HTML/CSS</span>
-                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">JavaScript</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 0.3rem; color: #FFA500; font-weight: 600; font-size: 1.05rem;">
-                            <span style="font-size: 1.2rem;">★</span> 4.8
-                        </div>
-                    </div>
-                    <div class="designer-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
-                        <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Designer" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid #9333EA;">
-                        <h4 style="color: #9333EA; font-size: 1.2rem; margin-bottom: 0.5rem;">Pierre Louis</h4>
-                        <div style="color: #525252; font-size: 0.98rem; margin-bottom: 0.7rem;">Logo Maker</div>
-                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.7rem;">
-                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">Illustrator</span>
-                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">Branding</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 0.3rem; color: #FFA500; font-weight: 600; font-size: 1.05rem;">
-                            <span style="font-size: 1.2rem;">★</span> 4.7
-                        </div>
-                    </div>
-                    <div class="designer-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
-                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Designer" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid #9333EA;">
-                        <h4 style="color: #9333EA; font-size: 1.2rem; margin-bottom: 0.5rem;">Sophie Bernard</h4>
-                        <div style="color: #525252; font-size: 0.98rem; margin-bottom: 0.7rem;">Grafis</div>
-                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.7rem;">
-                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">CorelDraw</span>
-                            <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">Poster Design</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 0.3rem; color: #FFA500; font-weight: 600; font-size: 1.05rem;">
-                            <span style="font-size: 1.2rem;">★</span> 4.6
-                        </div>
+                    <div style="display: flex; align-items: center; gap: 0.3rem; color: #FFA500; font-weight: 600; font-size: 1.05rem;">
+                        <span style="font-size: 1.2rem;">★</span> 4.9
                     </div>
                 </div>
+                <div class="designer-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Designer" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid #9333EA;">
+                    <h4 style="color: #9333EA; font-size: 1.2rem; margin-bottom: 0.5rem;">Marie Claire</h4>
+                    <div style="color: #525252; font-size: 0.98rem; margin-bottom: 0.7rem;">Front End Developer</div>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.7rem;">
+                        <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">React</span>
+                        <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">HTML/CSS</span>
+                        <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">JavaScript</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.3rem; color: #FFA500; font-weight: 600; font-size: 1.05rem;">
+                        <span style="font-size: 1.2rem;">★</span> 4.8
+                    </div>
+                </div>
+                <div class="designer-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
+                    <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Designer" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid #9333EA;">
+                    <h4 style="color: #9333EA; font-size: 1.2rem; margin-bottom: 0.5rem;">Pierre Louis</h4>
+                    <div style="color: #525252; font-size: 0.98rem; margin-bottom: 0.7rem;">Logo Maker</div>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.7rem;">
+                        <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">Illustrator</span>
+                        <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">Branding</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.3rem; color: #FFA500; font-weight: 600; font-size: 1.05rem;">
+                        <span style="font-size: 1.2rem;">★</span> 4.7
+                    </div>
+                </div>
+                <div class="designer-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Designer" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid #9333EA;">
+                    <h4 style="color: #9333EA; font-size: 1.2rem; margin-bottom: 0.5rem;">Sophie Bernard</h4>
+                    <div style="color: #525252; font-size: 0.98rem; margin-bottom: 0.7rem;">Grafis</div>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.7rem;">
+                        <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">CorelDraw</span>
+                        <span style="background: #F3E8FF; color: #7E22CE; border-radius: 12px; padding: 0.2rem 0.7rem; font-size: 0.85rem;">Poster Design</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.3rem; color: #FFA500; font-weight: 600; font-size: 1.05rem;">
+                        <span style="font-size: 1.2rem;">★</span> 4.6
+                    </div>
+                </div>
+            </div>
         </section>
+
+        <!-- KOMINOTE SECTION -->
         <section class="kominote-section">
             <div class="section-header">
                 <h2 style="color:#9333EA;">KOMINOTE BANMGIG</h2>
             </div>
             <div class="testimonials-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; margin: 2.5rem 0;">
-                <!-- Testimonial 1 -->
                 <div class="testimonial-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
                     <img src="https://randomuser.me/api/portraits/men/21.jpg" alt="User" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 2px solid #9333EA;">
-                    <p style="font-size: 1.05rem; color: #525252; margin-bottom: 1rem; text-align: center;">“Banmgig made it so easy and fast to find a professional designer for my business logo. Highly recommend!”</p>
+                    <p style="font-size: 1.05rem; color: #525252; margin-bottom: 1rem; text-align: center;">"Banmgig made it so easy and fast to find a professional designer for my business logo. Highly recommend!"</p>
                     <div style="color: #9333EA; font-weight: 600;">James Pierre</div>
                     <div style="color: #737373; font-size: 0.92rem;">Entrepreneur</div>
                 </div>
-                <!-- Testimonial 2 -->
                 <div class="testimonial-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
                     <img src="https://randomuser.me/api/portraits/women/36.jpg" alt="User" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 2px solid #9333EA;">
-                    <p style="font-size: 1.05rem; color: #525252; margin-bottom: 1rem; text-align: center;">“I needed a website for my portfolio and found a talented developer in minutes. Banmgig is reliable and super convenient!”</p>
+                    <p style="font-size: 1.05rem; color: #525252; margin-bottom: 1rem; text-align: center;">"I needed a website for my portfolio and found a talented developer in minutes. Banmgig is reliable and super convenient!"</p>
                     <div style="color: #9333EA; font-weight: 600;">Marie Joseph</div>
                     <div style="color: #737373; font-size: 0.92rem;">Photographer</div>
                 </div>
-                <!-- Testimonial 3 -->
                 <div class="testimonial-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
                     <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="User" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 2px solid #9333EA;">
-                    <p style="font-size: 1.05rem; color: #525252; margin-bottom: 1rem; text-align: center;">“I found a pro to help with my social media graphics. The process was quick and the results were amazing!”</p>
+                    <p style="font-size: 1.05rem; color: #525252; margin-bottom: 1rem; text-align: center;">"I found a pro to help with my social media graphics. The process was quick and the results were amazing!"</p>
                     <div style="color: #9333EA; font-weight: 600;">Samuel Louis</div>
                     <div style="color: #737373; font-size: 0.92rem;">Small Business Owner</div>
                 </div>
-                <!-- Testimonial 4 -->
                 <div class="testimonial-card" style="background: #fff; border: 1px solid #E5E5E5; border-radius: 14px; box-shadow: 0 4px 16px rgba(147,51,234,0.06); padding: 1.5rem; display: flex; flex-direction: column; align-items: center;">
                     <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="User" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 2px solid #9333EA;">
-                    <p style="font-size: 1.05rem; color: #525252; margin-bottom: 1rem; text-align: center;">“Reliable platform to connect with professionals for any project. I got my flyer designed in just a day!”</p>
+                    <p style="font-size: 1.05rem; color: #525252; margin-bottom: 1rem; text-align: center;">"Reliable platform to connect with professionals for any project. I got my flyer designed in just a day!"</p>
                     <div style="color: #9333EA; font-weight: 600;">Linda Charles</div>
                     <div style="color: #737373; font-size: 0.92rem;">Event Organizer</div>
                 </div>
@@ -1045,46 +1154,29 @@
             closeKreyateModalBtn.addEventListener('click', function() {
                 kreyateModal.classList.add('hidden');
             });
-            // Close modal on overlay click
             kreyateModal.addEventListener('click', function(e) {
                 if (e.target === kreyateModal) {
                     kreyateModal.classList.add('hidden');
                 }
             });
         }
-        // Scroll to the first .gigs-section when 'Gig cho' is clicked
+
+        // Scroll navigation
         document.getElementById('gig-cho-link').addEventListener('click', function(e) {
             e.preventDefault();
-            const section = document.querySelector('.gigs-section');
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-        // Scroll to the .kreyate-section when 'Kreyate Nou yo' is clicked
-        document.getElementById('kreyate-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            const section = document.querySelector('.kreyate-section');
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-        // Like button functionality
-        document.querySelectorAll('.like-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                btn.classList.toggle('liked');
-            });
+            document.querySelector('.gigs-section').scrollIntoView({ behavior: 'smooth' });
         });
 
-        // Scroll to the .kominote-section when 'Kominote' is clicked
+        document.getElementById('kreyate-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('.kreyate-section').scrollIntoView({ behavior: 'smooth' });
+        });
+
         const kominoteLink = document.getElementById('kominote-link');
         if (kominoteLink) {
             kominoteLink.addEventListener('click', function(e) {
                 e.preventDefault();
-                const section = document.querySelector('.kominote-section');
-                if (section) {
-                    section.scrollIntoView({ behavior: 'smooth' });
-                }
+                document.querySelector('.kominote-section').scrollIntoView({ behavior: 'smooth' });
             });
         }
 
@@ -1096,14 +1188,14 @@
             });
         });
 
-        // Category tags interaction
+        // Category tags
         document.querySelectorAll('.category-tag').forEach(tag => {
             tag.addEventListener('click', () => {
                 console.log('Category clicked:', tag.textContent);
             });
         });
 
-        // Dropdown functionality for login
+        // Dropdown functionality
         const loginDropdownBtn = document.getElementById('loginDropdownBtn');
         const loginDropdownMenu = document.getElementById('loginDropdownMenu');
         if (loginDropdownBtn && loginDropdownMenu) {
