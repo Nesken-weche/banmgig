@@ -8,7 +8,15 @@ from .firebase_utils import FirestoreClient
 firebase_client = FirestoreClient()
 
 def index(request):
+    import datetime
+    from django.utils.dateparse import parse_datetime
     jobs = firebase_client.query_collection('app_jobs', filters=[{'field': 'is_avail', 'operator': 'EQUAL', 'value': True}])
+    for job in jobs:
+        created_on = job.get('created_on')
+        if created_on and isinstance(created_on, str):
+            dt = parse_datetime(created_on)
+            if dt is not None:
+                job['created_on'] = dt
     return render(request, 'pages/index.html', {'jobs': jobs})
 
 def gig_creation(request):
@@ -55,7 +63,7 @@ def gig_creation(request):
             "bizName": gig.full_name,
             "city": gig.gig_city,
             "content": gig.description,
-            "created_on": gig.posted_at.isoformat() if gig.posted_at else None,
+            "created_on": gig.posted_at if gig.posted_at else None,
             "end_time": gig.deadline.strftime('%Y-%m-%dT00:00:00') if hasattr(gig.deadline, 'strftime') else str(gig.deadline) if gig.deadline else None,
             "has_link": False,
             "id": gig.id,
