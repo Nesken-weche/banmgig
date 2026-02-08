@@ -899,7 +899,7 @@
                                 </div> -->
                             </div>
 
-                            <p class="job-description">{{ job.description|default:'Looking for a talented freelancer to help with this project. Must have relevant experience and strong portfolio.' }}</p>
+                            <p class="job-description">{{ job.description|truncatechars:200 }}</p>
 
                             <div class="job-tags">
                                 <span class="job-tag">{{ job.category|default:'Grafis' }}</span>
